@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 //connect to mongodb
 mongoose
     .connect(process.env.MONGODB_URI_ATLAS, {
-        dbName: process.env.DB_NAME,
+        // dbName: process.env.DB_NAME,
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
