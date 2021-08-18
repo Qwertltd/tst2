@@ -1,0 +1,58 @@
+GET http://localhost:3000
+
+###Dashboard
+GET http://localhost:5000/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjY3NzQ3OTMsImV4cCI6MTYyNjc3ODM5MywiYXVkIjoiNjBmNjc3MzE0ZmNlZWMzMWU1MmIxNzE4IiwiaXNzIjoiQ2hpc29tIE9nYnVhZ3UifQ.WvElDj4Heb_hj_jiv_cz6MRd50VcZjN57CYhbr3zxSU
+
+
+###Login Route
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+  "email": "jondoe@gmail.com",
+  "password": "123456"
+}
+
+###Register Route
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+  "first_name": "john",
+  "last_name": "doe",
+  "email": "johndoe@gmail.com",
+  "password": "123456"
+}
+
+###Update Route
+POST http://localhost:5000/auth/update?id=611a77deed7775313b78d8dc
+Content-Type: application/json
+
+{
+  "first_name": "jon",
+  "last_name": "doe",
+  "email": "johndoe@gmail.com"
+}
+
+###Refresh token Route
+POST http://localhost:5000/auth/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTI5OTYxMzcsImV4cCI6MTYyNDU1MzczNywiYXVkIjoiNWVlYTBlOTlkMTU3ZjYzZjNlMzYxYjQxIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.9kFX7LEzyh6eopqF_TGZQRwYqrIPUUdN441ekfKxu7Q"
+}
+
+###Logout Route
+Delete http://localhost:5000/auth/logout
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTI5OTYxMzcsImV4cCI6MTYyNDU1MzczNywiYXVkIjoiNWVlYTBlOTlkMTU3ZjYzZjNlMzYxYjQxIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.9kFX7LEzyh6eopqF_TGZQRwYqrIPUUdN441ekfKxu7Q"
+}
+
+###All Categories
+GET http://localhost:5000/categories/all
+
+###Single Category
+Get http://localhost:5000/categories/?id=611be4d4ded15660b38e01c1
