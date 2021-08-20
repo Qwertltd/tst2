@@ -52,7 +52,10 @@ Content-Type: application/json
 }
 
 ###All Categories
-GET http://localhost:5000/categories/all
+GET https://zooprints-backend.herokuapp.com/categories/all
 
 ###Single Category
-Get http://localhost:5000/categories/?id=611be4d4ded15660b38e01c1
+Get http://localhost:5000/categories/?id=611d4f723794070017178b41
+
+###SubCategories under Category
+Get http://localhost:5000/subCategories/all/?categoryId=611d4f723794070017178b41
