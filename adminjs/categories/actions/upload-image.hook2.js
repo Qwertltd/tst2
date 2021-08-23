@@ -15,7 +15,7 @@ const after = async (response, request, context) => {
 
   if (record.isValid() && uploadImage) {
     const filePath = path.join('uploads', record.id().toString(), uploadImage.name);
-    console.log(uploadImage)
+    // await fs.promises.rename(uploadImage.path, filePath);
 
     var fileStream = fs.createReadStream(uploadImage.path);
     const params = {

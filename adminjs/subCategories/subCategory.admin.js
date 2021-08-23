@@ -4,7 +4,7 @@ const {SubCategory} = require('../../Models/SubCategory')
 const {
     after: uploadAfterHook,
     before: uploadBeforeHook,
-} = require('../categories/actions/upload-image.hook');
+} = require('../categories/actions/upload-image.hook2');
 
 /** @type {AdminJs.ResourceOptions} */
 const options = {
