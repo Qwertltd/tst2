@@ -5,7 +5,7 @@ import { Box } from '@adminjs/design-system'
 const Edit: React.FC<BasePropertyProps> = (props) => {
   const { record } = props
 
-  const srcImg = record.params['coverImage']
+  const srcImg = record.params['imageUrl']
   return (
     <Box>
       {srcImg ? (

@@ -13,13 +13,13 @@ const options = {
         icon: 'fa fa-users',
     },
     properties: {
-      coverImage: {
+      imageUrl: {
           isVisible: false,
       },
       uploadImage: {
         components: {
-          edit: AdminJs.bundle('./components/upload-image.edit.tsx'),
-          list: AdminJs.bundle('./components/upload-image.list.tsx'),
+          edit: AdminJs.bundle('../components/upload-image.edit.tsx'),
+          list: AdminJs.bundle('../components/upload-image.list.tsx'),
         },
       },
     },

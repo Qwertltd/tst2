@@ -11,6 +11,7 @@ const cors = require('cors')
 const AuthRoute = require('./Routes/Auth')
 const CategoryRoute = require('./Routes/Category')
 const SubCategoryRoute = require('./Routes/SubCategory')
+const ProductRoute = require('./Routes/Product')
 
 const options = require('./adminjs/admin.options');
 const buildAdminRouter = require('./adminjs/Admin.router')
@@ -41,6 +42,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/auth', AuthRoute);
 app.use('/categories', CategoryRoute);
 app.use('/subCategories', SubCategoryRoute);
+app.use('/products', ProductRoute);
 
 app.use(async (req, res, next) => {
     error = createError.NotFound('This route does not exist')

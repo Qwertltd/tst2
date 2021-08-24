@@ -9,7 +9,7 @@ const Edit: React.FC<BasePropertyProps> = (props) => {
     onChange(property.name, files[0])
   }
 
-  const uploadedPhoto = record.params.coverImage
+  const uploadedPhoto = record.params.imageUrl
   const photoToUpload = record.params[property.name]
 
   return (

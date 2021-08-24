@@ -1,15 +1,15 @@
 const AdminJs = require('adminjs')
-const {SubCategory} = require('../../Models/SubCategory')
+const {ProductImage} = require('../../Models/ProductImage')
 
 const {
     after: uploadAfterHook,
     before: uploadBeforeHook,
-} = require('../categories/actions/upload-image.hook2');
+} = require('./actions/upload-image.hook');
 
 /** @type {AdminJs.ResourceOptions} */
 const options = {
     parent: {
-        name: 'Admin Content',
+        name: 'Products',
         icon: 'fa fa-users',
     },
     properties: {
@@ -48,5 +48,5 @@ const options = {
 
 module.exports = {
     options,
-    resource: SubCategory,
+    resource: ProductImage,
 };
