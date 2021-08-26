@@ -52,10 +52,40 @@ Content-Type: application/json
 }
 
 ###All Categories
-GET https://zooprints-backend.herokuapp.com/categories/all
+GET http://localhost:5000/categories/all
 
 ###Single Category
-Get http://localhost:5000/categories/?id=611d4f723794070017178b41
+Get http://localhost:5000/categories/?id=6123c297910aa10017777d62
 
 ###SubCategories under Category
-Get http://localhost:5000/subCategories/all/?categoryId=611d4f723794070017178b41
+Get http://localhost:5000/subCategories/all/?categoryId=6123c297910aa10017777d62
+
+###Products under SubCategories
+Get http://localhost:5000/products/all/?subCategoryId=6123eeb78811fe510ff93d7b
+
+###Products Details
+Get http://localhost:5000/products/?id=6124c9ad3e457e1fdb3346e3
+###Products Images
+Get http://localhost:5000/products/images?productId=6124c9ad3e457e1fdb3346e3
+
+###Add Product to Cart
+Get http://localhost:5000/cart/addToCart?userId=611d515c6eccf100179da168&productId=6124c9ad3e457e1fdb3346e3
+
+###Add Product to Cart
+Post http://localhost:5000/cart/addToCart
+Content-Type: application/json
+
+{
+  "userId": "611d515c6eccf100179da168",
+  "productId": "6124c9ad3e457e1fdb3346e3",
+  "quantity": 3
+}
+
+###Get Cart
+Get http://localhost:5000/cart?userId=611d515c6eccf100179da168
+
+###Remove Product from Cart
+Delete http://localhost:5000/cart/removeFromCart?userId=611d515c6eccf100179da168
+
+###Empty Cart
+Delete http://localhost:5000/cart/empty-cart?userId=611d515c6eccf100179da168
