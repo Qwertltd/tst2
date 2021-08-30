@@ -13,6 +13,8 @@ const CategoryRoute = require('./Routes/Category')
 const SubCategoryRoute = require('./Routes/SubCategory')
 const ProductRoute = require('./Routes/Product')
 const CartRoute = require('./Routes/Cart')
+const PaymentRoute = require('./Routes/Payment')
+const OrderRoute = require('./Routes/Order')
 
 const options = require('./adminjs/admin.options');
 const buildAdminRouter = require('./adminjs/Admin.router')
@@ -45,6 +47,8 @@ app.use('/categories', CategoryRoute);
 app.use('/subCategories', SubCategoryRoute);
 app.use('/products', ProductRoute);
 app.use('/cart', CartRoute);
+app.use('/', PaymentRoute);
+app.use('/', OrderRoute);
 
 app.use(async (req, res, next) => {
     error = createError.NotFound('This route does not exist')

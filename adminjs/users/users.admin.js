@@ -3,10 +3,6 @@ const {User} = require('../../Models/User')
 
 /** @type {AdminJs.ResourceOptions} */
 const options = {
-    parent: {
-        name: 'Admin Content',
-        icon: 'fa fa-users',
-    },
     properties: {
         password: {
             type: 'password',

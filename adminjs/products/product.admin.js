@@ -10,7 +10,7 @@ const {
 const options = {
   parent: {
     name: 'Products',
-    icon: 'fa fa-users',
+    icon: 'fa fa-user',
   },
 };
 

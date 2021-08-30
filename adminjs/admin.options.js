@@ -9,11 +9,13 @@ const Category = require('./categories/category.admin')
 const SubCategory = require('./subCategories/subCategory.admin')
 const Product = require('./products/product.admin')
 const ProductImage = require('./products/productImage.admin')
+const Payment = require('./payments/payment.admin')
+const Order = require('./orders/order.admin')
 
 /** @type {import('adminjs').AdminJsOptions} */
 const options = {
     databases: [mongoose],
-    resources: [Category,SubCategory,User,Product,ProductImage],
+    resources: [Category,SubCategory,User,Product,ProductImage,Payment,Order],
     rootPath: '/admin',
     branding: {
         logo: false,

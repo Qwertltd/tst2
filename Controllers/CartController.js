@@ -18,7 +18,6 @@ module.exports = {
                     msg: "Invalid request"
                 })
             }
-            console.log(cart)
             //--If Cart Exists ----
             if (cart) {
                 //---- Check if index exists ----

@@ -8,10 +8,6 @@ const {
 
 /** @type {AdminJs.ResourceOptions} */
 const options = {
-    parent: {
-        name: 'Admin Content',
-        icon: 'fa fa-users',
-    },
     properties: {
       imageUrl: {
           isVisible: false,
