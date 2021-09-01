@@ -8,7 +8,7 @@ const paymentRepository = require('../Repositories/PaymentRepository')
 
 module.exports = {
     payment: async (req, res, next) => {
-        const {carts, token, total, userId, fields} = req.body;
+        const {carts, token, total, userId, values} = req.body;
         const idempontencyKey = uuid()
 
         try{
@@ -57,15 +57,15 @@ module.exports = {
                                 price: product.productId.price
                             }],
                             shipping: [{
-                                first_name: fields.first_name,
-                                last_name: fields.last_name,
-                                company_name: fields.company_name,
-                                phone: fields.phone,
-                                country: fields.country,
-                                address: fields.address,
-                                city: fields.city,
-                                post_code: fields.post_code,
-                                order_notes: fields.order_notes
+                                first_name: values.first_name,
+                                last_name: values.last_name,
+                                company_name: values.company_name,
+                                phone: values.phone,
+                                country: values.country,
+                                address: values.address,
+                                city: values.city,
+                                post_code: values.post_code,
+                                order_notes: values.order_notes
                             }],
                             userId: userId,
                             paymentId: paymentId,

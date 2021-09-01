@@ -42,13 +42,13 @@ app.use('/uploads', express.static('uploads'));
 //import json for form data
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use('/auth', AuthRoute);
-app.use('/categories', CategoryRoute);
-app.use('/subCategories', SubCategoryRoute);
-app.use('/products', ProductRoute);
-app.use('/cart', CartRoute);
-app.use('/', PaymentRoute);
-app.use('/', OrderRoute);
+app.use('/api/auth', AuthRoute);
+app.use('/api/categories', CategoryRoute);
+app.use('/api/subCategories', SubCategoryRoute);
+app.use('/api/products', ProductRoute);
+app.use('/api/cart', CartRoute);
+app.use('/api', PaymentRoute);
+app.use('/api', OrderRoute);
 
 app.use(async (req, res, next) => {
     error = createError.NotFound('This route does not exist')

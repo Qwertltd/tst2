@@ -162,4 +162,27 @@ module.exports = {
             })
         }
     },
+    getCartItemsCount: async (req, res) => {
+        try {
+            const {userId} = req.query;
+            let cart = await cartRepository.cartItemsCount(userId)
+            if (!cart) {
+                return res.status(400).json({
+                    type: "Invalid",
+                    msg: "Cart not Found",
+                })
+            }
+            res.status(200).json({
+                status: true,
+                data: cart.items.length
+            })
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({
+                type: "Invalid",
+                msg: "Something went wrong",
+                err: err
+            })
+        }
+    }
 }

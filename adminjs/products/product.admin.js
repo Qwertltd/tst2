@@ -4,13 +4,45 @@ const {Product} = require('../../Models/Product')
 const {
     after: uploadAfterHook,
     before: uploadBeforeHook,
-} = require('../categories/actions/upload-image.hook2');
+} = require('./actions/upload-image.hook');
 
 /** @type {AdminJs.ResourceOptions} */
 const options = {
   parent: {
     name: 'Products',
     icon: 'fa fa-user',
+  },
+  properties: {
+    imageUrl: {
+        isVisible: false,
+    },
+    uploadImage: {
+      components: {
+        edit: AdminJs.bundle('../components/upload-image.edit.tsx'),
+        list: AdminJs.bundle('../components/upload-image.list.tsx'),
+      },
+    },
+  },
+  actions: {
+    new: {
+      after: async (response, request, context) => {
+        return uploadAfterHook(response, request, context);
+      },
+      before: async (request, context) => {
+        return uploadBeforeHook(request, context);
+      },
+    },
+    edit: {
+      after: async (response, request, context) => {
+        return uploadAfterHook(response, request, context);
+      },
+      before: async (request, context) => {
+        return uploadBeforeHook(request, context);
+      },
+    },
+    show: {
+      isVisible: false,
+    },
   },
 };
 

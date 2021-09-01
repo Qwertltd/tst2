@@ -11,3 +11,7 @@ import Component5 from '../adminjs/components/upload-image.edit'
 AdminJS.UserComponents.Component5 = Component5
 import Component6 from '../adminjs/components/upload-image.list'
 AdminJS.UserComponents.Component6 = Component6
+import Component7 from '../adminjs/components/upload-image.edit'
+AdminJS.UserComponents.Component7 = Component7
+import Component8 from '../adminjs/components/upload-image.list'
+AdminJS.UserComponents.Component8 = Component8
