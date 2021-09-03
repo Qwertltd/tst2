@@ -21,7 +21,7 @@ let ItemSchema = new Schema({
 }, {
     timestamps: true
 })
-let ShippingSchema = new Schema({
+let BillingSchema = new Schema({
     first_name:{
         type: String,
         required: true
@@ -55,6 +55,37 @@ let ShippingSchema = new Schema({
 }, {
     timestamps: true
 })
+let ShippingSchema = new Schema({
+    first_name:{
+        type: String,
+        required: true
+    },
+    last_name:{
+        type: String,
+        required: true
+    },
+    company_name:{
+        type: String
+    },
+    phone:{
+        type: String,
+        required: true
+    },
+    country: {
+        type: String
+    },
+    address: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    post_code: {
+        type: String
+    }
+}, {
+    timestamps: true
+})
 const OrderSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -72,6 +103,7 @@ const OrderSchema = new Schema({
     status: {
         type: String,
     },
+    billing: [BillingSchema],
     shipping: [ShippingSchema],
 }, {
     timestamps: true

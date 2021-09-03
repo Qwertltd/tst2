@@ -56,7 +56,7 @@ module.exports = {
                                 total: product.total,
                                 price: product.productId.price
                             }],
-                            shipping: [{
+                            billing: [{
                                 first_name: values.first_name,
                                 last_name: values.last_name,
                                 company_name: values.company_name,
@@ -66,6 +66,16 @@ module.exports = {
                                 city: values.city,
                                 post_code: values.post_code,
                                 order_notes: values.order_notes
+                            }],
+                            shipping: [{
+                                first_name: values.shipping_first_name,
+                                last_name: values.shipping_last_name,
+                                company_name: values.shipping_company_name,
+                                phone: values.shipping_phone,
+                                country: values.shipping_country,
+                                address: values.shipping_address,
+                                city: values.shipping_city,
+                                post_code: values.shipping_post_code,
                             }],
                             userId: userId,
                             paymentId: paymentId,
