@@ -90,10 +90,8 @@ module.exports = {
             const userId = await verifyRefreshToken(refreshToken)
             client.DEL(userId, (err, val) => {
                 if (err) {
-                console.log(err.message)
                 throw createError.InternalServerError()
                 }
-                console.log(val)
                 res.sendStatus(204)
             })
         } catch (error) {

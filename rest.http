@@ -93,3 +93,15 @@ Delete http://localhost:5000/cart/empty-cart?userId=611d515c6eccf100179da168
 
 ###Get Order
 Get http://localhost:5000/api/gerOrder?userId=611d515c6eccf100179da168
+
+###Send Contact Us Message
+Post http://localhost:5000/api/createContactMessage
+Content-Type: application/json
+
+{
+  "full_name": "demo lord",
+  "email": "ogbuagu@me.coom",
+  "phone": 08099495388,
+  "subject": "test",
+  "message": "test",
+}

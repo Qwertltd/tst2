@@ -17,7 +17,6 @@ module.exports = {
                 data: order
             })
         } catch (err) {
-            console.log(err)
             res.status(400).json({
                 type: "Invalid",
                 msg: "Something went wrong",
@@ -32,7 +31,7 @@ module.exports = {
             if (!orders) {
                 return res.status(400).json({
                     type: "Invalid",
-                    msg: "Cart not Found",
+                    msg: "Orders not Found",
                 })
             }
             res.status(200).json({
@@ -40,7 +39,6 @@ module.exports = {
                 data: orders
             })
         } catch (err) {
-            console.log(err)
             res.status(400).json({
                 type: "Invalid",
                 msg: "Something went wrong",

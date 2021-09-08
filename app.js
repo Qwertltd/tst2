@@ -8,6 +8,7 @@ const { verifyAccessToken } = require('./helpers/jwt_helper')
 
 const cors = require('cors')
 
+const AppRoute = require('./Routes/App')
 const AuthRoute = require('./Routes/Auth')
 const CategoryRoute = require('./Routes/Category')
 const SubCategoryRoute = require('./Routes/SubCategory')
@@ -42,6 +43,7 @@ app.use('/uploads', express.static('uploads'));
 //import json for form data
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use('/api', AppRoute);
 app.use('/api/auth', AuthRoute);
 app.use('/api/categories', CategoryRoute);
 app.use('/api/subCategories', SubCategoryRoute);

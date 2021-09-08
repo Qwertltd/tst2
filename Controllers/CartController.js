@@ -85,7 +85,6 @@ module.exports = {
                 res.json(cart);
             }
         } catch (err) {
-            console.log(err)
             res.status(400).json({
                 type: "Invalid",
                 msg: "Something went wrong",
@@ -108,7 +107,6 @@ module.exports = {
                 data: cart
             })
         } catch (err) {
-            console.log(err)
             res.status(400).json({
                 type: "Invalid",
                 msg: "Something went wrong",
@@ -177,7 +175,6 @@ module.exports = {
                 data: cart.items.length
             })
         } catch (err) {
-            console.log(err)
             res.status(400).json({
                 type: "Invalid",
                 msg: "Something went wrong",
