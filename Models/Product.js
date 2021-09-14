@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
     subCategoryId:{type: Schema.Types.ObjectId,ref: 'SubCategory'},
+    UserId:{type: Schema.Types.ObjectId,ref: 'User'},
     title:{type: String,required: true},
     file:{type: Object},
     imageUrl:{type: String},

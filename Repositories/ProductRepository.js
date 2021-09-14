@@ -6,4 +6,8 @@ exports.productsBySubCategoryId = async subCategory_id => {
 exports.productById = async id => {
     const product = await Product.findById(id);
     return product;
+};
+exports.create = async payload => {
+    const newProduct = await Product.create(payload);
+    return newProduct
 }

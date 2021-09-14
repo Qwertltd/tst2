@@ -1,6 +1,7 @@
 const createError = require('http-errors')
 const {Product} = require('../Models/Product')
 const {ProductImage} = require('../Models/ProductImage')
+const productRepository = require('../Repositories/ProductRepository')
   
 module.exports = {
     all: async (req, res, next) => {
@@ -44,4 +45,28 @@ module.exports = {
             next(error)
         }
     },
+    create: async(req,res,next) => {
+        const {values} = req.body;
+        try{
+            const productData = {
+                UserId: values.UserId,
+                title: values.title,
+                file: values.file,
+                imageUrl: values.imageUrl,
+                price: values.price,
+                description: values.description,
+                dimension: values.dimension,
+                additional_info: values.additional_info,
+            }
+            let product = await productRepository.create(productData)
+
+            res.json(product);
+        }catch (err) {
+            res.status(400).json({
+                type: "Invalid",
+                msg: "Something went wrong",
+                err: err
+            })
+        }
+    }
 }

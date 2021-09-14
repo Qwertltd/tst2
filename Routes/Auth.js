@@ -12,4 +12,8 @@ router.post('/refresh-token', AuthController.refreshToken)
 
 router.delete('/logout', AuthController.logout)
 
+router.post("/password-reset", AuthController.logout)
+
+router.post("/password-reset/:userId/:token", AuthController.logout)
+
 module.exports = router
