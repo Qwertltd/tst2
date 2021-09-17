@@ -15,3 +15,5 @@ import Component7 from '../adminjs/components/upload-image.edit'
 AdminJS.UserComponents.Component7 = Component7
 import Component8 from '../adminjs/components/upload-image.list'
 AdminJS.UserComponents.Component8 = Component8
+import Component9 from '../adminjs/components/dashboard-component'
+AdminJS.UserComponents.Component9 = Component9

@@ -23,7 +23,10 @@ const options = {
         logo: false,
         companyName: 'ZooPrints',
         softwareBrothers: false,
-    }
+    },
+    dashboard: {
+        component: AdminJS.bundle('./components/dashboard-component')
+    },
 };
 
 module.exports = options;
