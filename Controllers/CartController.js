@@ -8,6 +8,7 @@ module.exports = {
     addItemToCart: async (req, res) => {
         const {userId} = req.body;
         const {productId} = req.body;
+        const {paper_stock} = req.body;
         const quantity = Number.parseInt(req.body.quantity);
         try {
             let cart = await cartRepository.cart(userId);
@@ -23,6 +24,7 @@ module.exports = {
                 //---- Check if index exists ----
                 const indexFound = cart.items.findIndex(item => item.productId.id == productId);
                 if (indexFound !== -1 && quantity === -1) {
+                    cart.items[indexFound].paper_stock = paper_stock,
                     cart.items[indexFound].quantity = cart.items[indexFound].quantity + quantity;
                     cart.items[indexFound].total = cart.items[indexFound].quantity * productDetails.price;
                     cart.items[indexFound].price = productDetails.price
@@ -40,6 +42,7 @@ module.exports = {
                 //----------Check if product exist, just add the previous quantity with the new quantity and update the total price-------
                 else if (indexFound !== -1) {
                     cart.items[indexFound].quantity = quantity;
+                    cart.items[indexFound].paper_stock = paper_stock,
                     cart.items[indexFound].total = cart.items[indexFound].quantity * productDetails.price;
                     cart.items[indexFound].price = productDetails.price
                     cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
@@ -49,6 +52,7 @@ module.exports = {
                     cart.items.push({
                         productId: productId,
                         quantity: quantity,
+                        paper_stock: paper_stock,
                         price: productDetails.price,
                         total: parseInt(productDetails.price * quantity)
                     })
@@ -74,6 +78,7 @@ module.exports = {
                     items: [{
                         productId: productId,
                         quantity: quantity,
+                        paper_stock: paper_stock,
                         total: parseInt(productDetails.price * quantity),
                         price: productDetails.price
                     }],

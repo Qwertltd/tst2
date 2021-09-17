@@ -54,6 +54,7 @@ module.exports = {
                                 productId: product.productId._id,
                                 quantity: product.quantity,
                                 total: product.total,
+                                paper_stock: product.paper_stock,
                                 price: product.productId.price
                             }],
                             billing: [{
@@ -87,6 +88,7 @@ module.exports = {
                         await order.items.push({
                             productId: product.productId._id,
                             quantity: product.quantity,
+                            paper_stock: product.paper_stock,
                             total: product.total,
                             price: product.productId.price
                         })

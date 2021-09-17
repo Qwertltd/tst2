@@ -14,6 +14,9 @@ let ItemSchema = new Schema({
         type: Number,
         required: true
     },
+    paper_stock: {
+        type: String,
+    },
     total: {
         type: Number,
         required: true,

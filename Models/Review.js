@@ -5,6 +5,8 @@ const ReviewSchema = new Schema({
     productId:{type: Schema.Types.ObjectId,ref: 'Product'},
     userId:{type: Schema.Types.ObjectId,ref: 'User'},
     comment:{type: String},
+    first_name:{type: String},
+    last_name:{type: String},
     rating:{
         type: Number,
         default: 0
