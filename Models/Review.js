@@ -5,7 +5,10 @@ const ReviewSchema = new Schema({
     productId:{type: Schema.Types.ObjectId,ref: 'Product'},
     userId:{type: Schema.Types.ObjectId,ref: 'User'},
     comment:{type: String},
-    rating:{type: String},
+    rating:{
+        type: Number,
+        default: 0
+    },
 
 },{
     timestamps: true,

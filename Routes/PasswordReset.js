@@ -1,63 +1,92 @@
-
+const createError = require('http-errors')
 const { User } = require("../Models/User");
 const { Token } = require("../Models/Token");
-const sendEmail = require("../helpers/sendEmail");
+const sendEmail = require("../helpers/email/sendEmail");
 const crypto = require("crypto");
 const Joi = require("joi");
+const bcrypt = require('bcrypt')
 const express = require("express");
 const router = express.Router();
 
-router.post("/password-reset", async (req, res) => {
+router.post("/requestResetPassword", async (req, res) => {
     try {
         const schema = Joi.object({ email: Joi.string().email().required() });
         const { error } = schema.validate(req.body);
-        if (error) return res.status(400).send(error.details[0].message);
+        if (error) return res.status(400).json({type: "Invalid",msg: error.details[0].message,err: error});
 
         const user = await User.findOne({ email: req.body.email });
         if (!user)
-            return res.status(400).send("user with given email doesn't exist");
+            return res.status(400).json({type: "Invalid",msg: "user with given email doesn't exist"});
 
         let token = await Token.findOne({ userId: user._id });
-        if (!token) {
-            token = await new Token({
-                userId: user._id,
-                token: crypto.randomBytes(32).toString("hex"),
-            }).save();
-        }
+        if (token) { await token.deleteOne()};
+        
+            
 
-        const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token.token}`;
-        await sendEmail(user.email, "Password reset", link);
+        let resetToken = crypto.randomBytes(32).toString("hex");
+        const salt = await bcrypt.genSalt(20)
+        const hash = await bcrypt.hash(resetToken, salt);
+        await new Token({
+            userId: user._id,
+            token: hash,
+            createdAt: Date.now(),
+        }).save();
+
+        const link = `${process.env.FRONTEND_BASE_URL}/password-reset/${user._id}/${resetToken}`;
+        await sendEmail(user.email, "Password Reset Request",{name: user.first_name,link: link},"./template/requestResetPassword.handlebars");
 
         res.send("password reset link sent to your email account");
     } catch (error) {
-        res.send("An error occured");
-        console.log(error);
+        res.status(400).json({
+            type: "Invalid",
+            msg: "Something went wrong",
+            err: error
+        })
     }
 });
 
-router.post("/password-reset/:userId/:token", async (req, res) => {
+router.post("/resetPassword", async (req, res) => {
     try {
-        const schema = Joi.object({ password: Joi.string().required() });
+        const schema = Joi.object({ userId: Joi.string().required(), token: Joi.string().required(), password: Joi.string().min(6).required() });
         const { error } = schema.validate(req.body);
-        if (error) return res.status(400).send(error.details[0].message);
+        if (error) return res.status(400).json({type: "Invalid",msg: error.details[0].message,err: error});
 
-        const user = await User.findById(req.params.userId);
-        if (!user) return res.status(400).send("invalid link or expired");
+        const { userId, token, password } = req.body;
 
-        const token = await Token.findOne({
+        const user = await User.findById(userId);
+        if (!user) return res.status(400).json({type: "Invalid",msg: "User Account not Found"});
+
+        const checkToken = await Token.findOne({
             userId: user._id,
-            token: req.params.token,
         });
-        if (!token) return res.status(400).send("Invalid link or expired");
+        if (!checkToken) return res.status(400).json({type: "Invalid",msg: "Invalid password reset token"});
 
-        user.password = req.body.password;
+        const isValid = await bcrypt.compare(token, checkToken.token);
+        if (!isValid) {
+            return res.status(400).json({type: "Invalid",msg: "Invalid or expired password reset token"});
+        }
+
+        const salt = await bcrypt.genSalt(10)
+        const hash = await bcrypt.hash(password, salt);
+        user.password = hash;
         await user.save();
-        await token.delete();
+        sendEmail(
+            user.email,
+            "Password Reset Successfully",
+            {
+              name: user.first_name,
+            },
+            "./template/resetPassword.handlebars"
+        );
+        await checkToken.delete();
 
         res.send("password reset sucessfully.");
     } catch (error) {
-        res.send("An error occured");
-        console.log(error);
+        res.status(400).json({
+            type: "Invalid",
+            msg: "Something went wrong",
+            err: error
+        })
     }
 });
 

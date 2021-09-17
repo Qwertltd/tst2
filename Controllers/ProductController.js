@@ -68,5 +68,35 @@ module.exports = {
                 err: err
             })
         }
-    }
+    },
+    createReview: async(req,res,next) => {
+        const {userId} = req.body;
+        const {productId} = req.body;
+        const {comment} = req.body;
+        const {rating} = req.body;
+        try{
+            const ratingData = {
+                userId: userId,
+                productId: productId,
+                comment: comment,
+                rating: rating,
+            }
+            let review = await productRepository.createReview(ratingData)
+            res.status(200).json({
+                status: true,
+                data: review
+            })
+        }catch (err) {
+            res.status(400).json({
+                type: "Invalid",
+                msg: "Something went wrong",
+                err: err
+            })
+        }
+    },
+    getReviews: async (req, res, next) => {
+        const product_id = await req.query.productId;
+        const reviews = await productRepository.reviewsByProductId(product_id)
+        res.send({ reviews })
+    },
 }

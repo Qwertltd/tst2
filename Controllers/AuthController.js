@@ -1,5 +1,6 @@
 const createError = require('http-errors')
 const {User} = require('../Models/User')
+const bcrypt = require('bcrypt')
 const { authRegisterSchema, authLoginSchema, authUpdateSchema } = require('../helpers/validation')
 const {
     signAccessToken,
@@ -98,4 +99,30 @@ module.exports = {
             next(error)
         }
     },
+    changePassword: async (req, res, next) => {
+        try {
+            const result = req.body
+            const user = await User.findOne({ email: result.email })
+            if (!user) throw createError.NotFound('User not registered')
+
+            const isMatch = await user.isValidPassword(result.currentPassword)
+            if (!isMatch)
+                throw createError.Unauthorized('Current Password is not valid')
+
+
+            const salt = await bcrypt.genSalt(10)
+            const hashedPassword = await bcrypt.hash(result.newPassword, salt)
+            result.newPassword = hashedPassword
+
+            const updateUser = await User.findByIdAndUpdate(result.id, {'password': hashedPassword}, {
+                new: true
+            });
+
+            res.send({ updateUser })
+        } catch (error) {
+            if (error.isJoi === true)
+                return next(createError.BadRequest('Invalid Username/Password'))
+            next(error)
+        }
+    }
 }

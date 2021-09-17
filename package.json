@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
     "http-errors": "^1.8.0",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
