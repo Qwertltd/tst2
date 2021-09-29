@@ -16,6 +16,7 @@ const ProductRoute = require('./Routes/Product')
 const CartRoute = require('./Routes/Cart')
 const PaymentRoute = require('./Routes/Payment')
 const OrderRoute = require('./Routes/Order')
+const TemplateRoute = require('./Routes/Template')
 const PasswordResetRoute = require('./Routes/PasswordReset')
 
 const options = require('./adminjs/admin.options');
@@ -53,6 +54,7 @@ app.use('/api/cart', CartRoute);
 app.use('/api', PaymentRoute);
 app.use('/api', OrderRoute);
 app.use('/api', PasswordResetRoute);
+app.use('/api', TemplateRoute);
 
 app.use(async (req, res, next) => {
     error = createError.NotFound('This route does not exist')
