@@ -13,7 +13,31 @@ const TemplateSchema = new Schema({
     height: {
         type: Number,
         required: true,
-    }
+    },
+    numberofColumns: {
+        type: Number,
+        required: true,
+    },
+    total: {
+        type: Number,
+        required: true,
+    },
+    topMargin: {
+        type: Number,
+        required: true,
+    },
+    leftMargin: {
+        type: Number,
+        required: true,
+    },
+    verticalSpacing: {
+        type: Number,
+        required: true,
+    },
+    horizontalSpacing: {
+        type: Number,
+        required: true,
+    },
 },{
     timestamps: true,
 });
