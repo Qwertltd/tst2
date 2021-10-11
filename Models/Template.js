@@ -38,6 +38,10 @@ const TemplateSchema = new Schema({
         type: Number,
         required: true,
     },
+    cornerRadius: {
+        type: Number,
+        required: true,
+    },
 },{
     timestamps: true,
 });
