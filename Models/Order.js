@@ -108,6 +108,9 @@ const OrderSchema = new Schema({
     },
     billing: [BillingSchema],
     shipping: [ShippingSchema],
+    pdf: {
+        type: String
+    },
 }, {
     timestamps: true
 })

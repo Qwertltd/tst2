@@ -16,6 +16,7 @@ const ProductRoute = require('./Routes/Product')
 const CartRoute = require('./Routes/Cart')
 const PaymentRoute = require('./Routes/Payment')
 const OrderRoute = require('./Routes/Order')
+const OrderPdfFileRoute = require('./Routes/OrderPdfFile')
 const TemplateRoute = require('./Routes/Template')
 const PasswordResetRoute = require('./Routes/PasswordReset')
 
@@ -43,8 +44,8 @@ const router = buildAdminRouter(admin);
 app.use(admin.options.rootPath, router);
 app.use('/uploads', express.static('uploads'));
 //import json for form data
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json({limit: '50mb'}))
+app.use(express.urlencoded({ extended: true, limit: '50mb' }))
 app.use('/api', AppRoute);
 app.use('/api/auth', AuthRoute);
 app.use('/api/categories', CategoryRoute);
@@ -55,6 +56,7 @@ app.use('/api', PaymentRoute);
 app.use('/api', OrderRoute);
 app.use('/api', PasswordResetRoute);
 app.use('/api', TemplateRoute);
+app.use('/api', OrderPdfFileRoute);
 
 app.use(async (req, res, next) => {
     error = createError.NotFound('This route does not exist')

@@ -5,6 +5,8 @@ const uuid = require('uuid/v4');
 const cartRepository = require('../Repositories/CartRepository')
 const orderRepository = require('../Repositories/OrderRepository')
 const paymentRepository = require('../Repositories/PaymentRepository')
+const productRepository = require('../Repositories/ProductRepository')
+const orderPdfFileRepository = require('../Repositories/OrderPdfFileRepository')
 
 module.exports = {
     payment: async (req, res, next) => {
@@ -83,7 +85,24 @@ module.exports = {
                             status: 'paid',
                             subTotal: parseInt(total)
                         }
-                        order = await orderRepository.create(orderData)
+                        let order = await orderRepository.create(orderData)
+
+                        const orderPdfFiles = await orderPdfFileRepository.byProductId(product.productId._id)
+                        if(orderPdfFiles){
+                            console.log("1")
+                            for (i = 0; i < orderPdfFiles.length; i++) {    
+                                console.log("2") 
+                                if(typeof orderPdfFiles[i].orderId === "undefined"){
+                                    console.log("3")
+                                    const orderPdfFile = await orderPdfFileRepository.getById(orderPdfFiles[i]._id)
+                                    console.log(orderPdfFile)
+                                    orderPdfFile.orderId = order._id;
+                                    orderPdfFile.save();
+                                    break;   
+                                }
+                            }; 
+                            
+                        }
                     }else{
                         await order.items.push({
                             productId: product.productId._id,

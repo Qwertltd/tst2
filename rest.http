@@ -64,7 +64,7 @@ Get http://localhost:5000/subCategories/all/?categoryId=6123c297910aa10017777d62
 Get http://localhost:5000/products/all/?subCategoryId=6123eeb78811fe510ff93d7b
 
 ###Products Details
-Get http://localhost:5000/products/?id=6124c9ad3e457e1fdb3346e3
+Get http://localhost:5000/api/products/?id=616d0ceae8ba906ddd9d4c2c
 ###Products Images
 Get http://localhost:5000/products/images?productId=6124c9ad3e457e1fdb3346e3
 
@@ -92,7 +92,7 @@ Delete http://localhost:5000/cart/empty-cart?userId=611d515c6eccf100179da168
 
 
 ###Get Order
-Get http://localhost:5000/api/gerOrder?userId=611d515c6eccf100179da168
+Get http://localhost:5000/api/getOrder?userId=611d515c6eccf100179da168
 
 ###Send Contact Us Message
 Post http://localhost:5000/api/createContactMessage
