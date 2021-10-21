@@ -57,6 +57,7 @@ module.exports = {
                         total: parseInt(productDetails.price * quantity)
                     })
                     cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
+                    //Find Product here and create OrderPdfFile for it
                 }
                 //----If quantity of price is 0 throw the error -------
                 else {
@@ -101,12 +102,6 @@ module.exports = {
         try {
             const {userId} = req.query;
             let cart = await cartRepository.cart(userId)
-            if (!cart) {
-                return res.status(400).json({
-                    type: "Invalid",
-                    msg: "Cart not Found",
-                })
-            }
             res.status(200).json({
                 status: true,
                 data: cart
