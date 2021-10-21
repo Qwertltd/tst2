@@ -9,7 +9,7 @@ exports.byProductId = async (product_id) => {
     return orderPdfFile
 }
 exports.byOrderId = async (order_id) => {
-    const orderPdfFile = await OrderPdfFile.find({orderId: order_id});
+    const orderPdfFile = await OrderPdfFile.findOne({orderId: order_id});
     return orderPdfFile
 }
 exports.getById = async (id) => {

@@ -16,6 +16,7 @@
     "@types/styled-components": "^5.1.15",
     "adminjs": "^5.1.0",
     "aws-sdk": "^2.970.0",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "canvas": "^2.8.0",
@@ -42,5 +43,8 @@
     "stripe": "^8.170.0",
     "tslib": "^2.3.1",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "rollup-plugin-polyfill-node": "^0.7.0"
   }
 }

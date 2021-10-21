@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, ButtonCSS } from '@adminjs/design-system'
+import { ButtonCSS } from '@adminjs/design-system'
 import { BasePropertyProps } from 'adminjs'
 
 const Edit: React.FC<BasePropertyProps> = (props) => {

@@ -1,9 +1,22 @@
+global.window = {document: {createElementNS: () => {return {}} }};
+global.navigator = {};
+global.btoa = () => {};
+
+const fs = require('fs')
+const AWS = require('aws-sdk');
+const https = require('https');
+
 const createError = require('http-errors')
 const {OrderPdfFile} = require("../Models/OrderPdfFile");
 const orderPdfFileRepository = require('../Repositories/OrderPdfFileRepository')
 const { jsPDF } = require("jspdf");
 const mergeImages = require('merge-images');
 const { Canvas, Image } = require('canvas');
+
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
   
 module.exports = {
     create: async(req,res,next) => {
@@ -34,8 +47,11 @@ module.exports = {
     getByOrderId: async(req,res,next) => {
         try{
             const id = await req.query.id;
-            const orderPdfFiles = await orderPdfFileRepository.byOrderId(id);
-            res.send(orderPdfFiles)
+            const orderPdfFile = await orderPdfFileRepository.byOrderId(id);
+            res.status(200).json({
+                status: true,
+                data: orderPdfFile
+            })
             
         }catch (error) {
             if (error.isJoi === true) error.status = 422
@@ -110,7 +126,27 @@ module.exports = {
                 0,
                 0
             );
-            pdf.save(itemId+'.pdf');
+            // pdf.save(itemId+'.pdf');
+
+            // let dataUrl = pdf.output("datauristring")
+            // const uploadFile = {
+            //     buffer: dataUrlToBuffer(dataUrl)
+            // }
+            // const filePath = `orders/designPdf/${itemId}.pdf`;
+            // const params = {
+            //     Bucket: 'zooprints',
+            //     Key: filePath,
+            //     Body: uploadFile.buffer,
+            //     ACL:'public-read'
+            // };
+            // s3.upload(params, function(err, data) {
+            //     if (err) {
+            //         throw err;
+            //     }
+            //     fs.writeFileSync('./order.pdf', data.Location)
+            // });
+
+            return fs.writeFileSync(itemId+'.pdf', pdf.output())
             
             res.status(200).json({
                 status: true,
@@ -125,3 +161,6 @@ module.exports = {
         }
     },
 }
+delete global.window;
+delete global.navigator;
+delete global.btoa;
