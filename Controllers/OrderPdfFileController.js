@@ -1,7 +1,8 @@
 global.window = {document: {createElementNS: () => {return {}} }};
 global.navigator = {};
 global.btoa = () => {};
-
+var path = require('path');
+var mime = require('mime');
 const fs = require('fs')
 const AWS = require('aws-sdk');
 const https = require('https');
@@ -126,13 +127,32 @@ module.exports = {
                 0,
                 0
             );
-            // pdf.save(itemId+'.pdf');
+            pdf.save('orderPdf/'+itemId+'.pdf');
+            // fs.writeFileSync(`orderPdf/${itemId}.pdf`, pdf.output())
+            var fifi = __dirname + `/../orderPdf/${itemId}`+'.pdf';
+            var filename = path.basename(fifi);
+            var mimetype = mime.lookup(fifi);
+          
+            res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+            res.setHeader('Content-type', mimetype);
+          
+            var filestream = fs.createReadStream(fifi);
+            filestream.pipe(res);
+            // res.download('', `${itemId}.pdf`, (err) => {
+            //     if (err) {
+            //       res.status(500).send({
+            //         message: "Could not download the file. " + err,
+            //       });
+            //     }
+            // });
 
-            // let dataUrl = pdf.output("datauristring")
+            // let uri = pdf.output("datauristring")
+            // var dataUri = uri.split(',')[1]; 
             // const uploadFile = {
-            //     buffer: dataUrlToBuffer(dataUrl)
+            //     buffer: Buffer.from(dataUri).toString('base64')
             // }
             // const filePath = `orders/designPdf/${itemId}.pdf`;
+            // console.log(filePath)
             // const params = {
             //     Bucket: 'zooprints',
             //     Key: filePath,
@@ -143,15 +163,16 @@ module.exports = {
             //     if (err) {
             //         throw err;
             //     }
-            //     fs.writeFileSync('./order.pdf', data.Location)
+            //     console.log(data.Location)
+            //     res.download(data.Location, 'test.pdf', (err) => {
+            //         if (err) {
+            //           res.status(500).send({
+            //             message: "Could not download the file. " + err,
+            //           });
+            //         }
+            //     });
             // });
-
-            return fs.writeFileSync(itemId+'.pdf', pdf.output())
-            
-            res.status(200).json({
-                status: true,
-                data: b64
-            })
+            // res.send({ response })
         } catch (err) {
             res.status(400).json({
                 type: "Invalid",
